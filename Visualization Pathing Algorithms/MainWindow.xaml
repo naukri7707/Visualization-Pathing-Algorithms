@@ -1,0 +1,48 @@
+﻿<Window x:Name="winMain" x:Class="VisualizationPathingAlgorithms.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VisualizationPathingAlgorithms"
+        mc:Ignorable="d"
+        Title="Visualization Pathing Algorithms" Height="800" Width="1400" WindowStartupLocation="CenterScreen" KeyDown="winMain_KeyDown" Icon="pathIcon.ico">
+    <Grid x:Name="girdMain" Background="#FF1E1E1E">
+        <Canvas x:Name="cvsMain" HorizontalAlignment="Left" Height="700" Margin="250,30,0,0" VerticalAlignment="Top" Width="696" MouseMove="cvsMain_MouseMove" MouseDown="cvsMain_MouseDown" MouseUp="cvsMain_MouseUp" MouseLeave="cvsMain_MouseLeave" MouseEnter="cvsMain_MouseEnter"/>
+        <Grid x:Name="girdSettingList" HorizontalAlignment="Left" Height="730" Margin="10,30,0,0" VerticalAlignment="Top" Width="193">
+            <Button x:Name="btnSetMap" Content="設置" Margin="11,44,122,0" VerticalAlignment="Top" Height="20" Click="btnSetMap_Click" Width="60"/>
+            <TextBox x:Name="txtSize" HorizontalAlignment="Left" Height="23" Margin="70,14,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" InputMethod.PreferredImeState="Off"/>
+            <Label x:Name="lblSize" Content="尺寸" HorizontalAlignment="Left" Margin="11,9,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.542,1.404" FontWeight="Bold" Width="60" HorizontalContentAlignment="Center"/>
+            <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Width="60" Click="btnStart_Click" Height="20"/>
+            <Button x:Name="btnSetDelayTime" Content="設置" Margin="11,118,122,0" VerticalAlignment="Top" Height="20" Click="btnSetDelayTime_Click" Width="60"/>
+            <TextBox x:Name="txtDelayTime" HorizontalAlignment="Left" Height="23" Margin="70,88,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" InputMethod.PreferredImeState="Off" />
+            <Label x:Name="lblDelayTime" Content="延遲" HorizontalAlignment="Left" Margin="11,83,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.542,1.404" FontWeight="Bold" Width="60" HorizontalContentAlignment="Center"/>
+            <ComboBox x:Name="cboAlgorithmSelector" HorizontalAlignment="Left" Margin="70,165,0,0" VerticalAlignment="Top" Width="100" SelectedIndex="2" SelectionChanged="cboAlgorithmSelector_SelectionChanged">
+                <ComboBoxItem Content="Dijkstra" HorizontalAlignment="Left" Width="123.2"/>
+                <ComboBoxItem Content="Quick Path" HorizontalAlignment="Left" Width="123.2"/>
+                <ComboBoxItem Content="A star" HorizontalAlignment="Left" Width="123.2"/>
+            </ComboBox>
+            <Label x:Name="lblG" Content="G = 0" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.5,0.5" Width="171" FontWeight="Bold"/>
+            <Label x:Name="lblH" Content="H = 0" HorizontalAlignment="Left" Margin="10,419,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.5,0.5" Width="171" FontWeight="Bold"/>
+            <Label x:Name="lblF" Content="F = 0" HorizontalAlignment="Left" Margin="10,449,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.5,0.5" Width="171" FontWeight="Bold"/>
+            <Label x:Name="lblFrom" Content="From = [0,0]" HorizontalAlignment="Left" Margin="10,329,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.5,0.5" Width="171" FontWeight="Bold"/>
+            <Button x:Name="btnClearMap" Content="清除" Margin="80,44,53,0" VerticalAlignment="Top" Height="20" Click="btnClearMap_Click" Width="60"/>
+            <Button x:Name="btnMapOut" Content="匯出" Margin="80,700,53,0" VerticalAlignment="Top" Height="20" Click="btnMapOut_Click" Width="60"/>
+            <Button x:Name="btnMapIn" Content="匯入" Margin="10,700,123,0" VerticalAlignment="Top" Height="20" Click="btnMapIn_Click" Width="60"/>
+            <Label x:Name="lblAlgorithm" Content="演算法" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.542,1.404" FontWeight="Bold" Width="60"/>
+            <Label x:Name="lblStep" Content="Step = 0" HorizontalAlignment="Left" Margin="10,359,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.5,0.5" Width="171" FontWeight="Bold"/>
+            <Label x:Name="lblPos" Content="[0,0]" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="24" RenderTransformOrigin="0.5,0.5" Width="171" FontWeight="Bold"/>
+        </Grid>
+        <CheckBox x:Name="cbNodesStatistics" Content="節點統計" Margin="973,37,0,0" VerticalAlignment="Top" Checked="cbNodeStatistics_Checked" Unchecked="cbNodeStatistics_Unchecked" FontSize="16" FontWeight="Bold" Background="White" IsChecked="True" Foreground="White" HorizontalAlignment="Left" Width="85"/>
+        <Grid x:Name="girdNodesStatistics" HorizontalAlignment="Left" Height="170" Margin="973,61,0,0" VerticalAlignment="Top" Width="202">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lblSpace" Content="Space = 0" HorizontalAlignment="Left" Margin="10,10,-40,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.5,0.5" Width="170" FontWeight="Bold" Grid.ColumnSpan="2"/>
+            <Label x:Name="lblObstacle" Content="Obstacle= 0" HorizontalAlignment="Left" Margin="10,50,-40,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.5,0.5" Width="170" FontWeight="Bold" Grid.ColumnSpan="2"/>
+            <Label x:Name="lblOpen" Content="Open = 0" HorizontalAlignment="Left" Margin="10,90,-40,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.599,0.625" Width="170" FontWeight="Bold" Grid.ColumnSpan="2"/>
+            <Label x:Name="lblClose" Content="Close = 0" HorizontalAlignment="Left" Margin="10,130,-40,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" FontSize="16" RenderTransformOrigin="0.5,0.5" Width="170" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        </Grid>
+        <Grid x:Name="girdStateBox" HorizontalAlignment="Left" Height="723" Margin="973,37,0,0" VerticalAlignment="Top" Width="411"/>
+    </Grid>
+</Window>
